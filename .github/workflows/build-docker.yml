@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main", "master" ] # Trigger on push to main or master
+  pull_request:
+    branches: [ "main", "master" ] # Trigger on pull requests
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # The runner environment
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4 # Action to check out your code
+
+    - name: Set up Docker Buildx (for multi-platform builds if needed)
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: . # Path to the Dockerfile's build context (usually the root of your repo)
+        file: .github/workflows/Dockerfile # Path to your Dockerfile
+        push: false # Set to false to just build, not push (for testing)
+        tags: dali-test:test # A dummy tag for the build process
+        load: true # Load the image into Docker daemon for local testing (if push is false)
+        # Add build-args if your Dockerfile uses them
+        # build-args: |
+        #   CUDA_ARCH_BIN=7.5
