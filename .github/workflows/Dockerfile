@@ -43,7 +43,7 @@ RUN conda install -y -c conda-forge \
     # Install DALI with CUDA 12.0 support and dependencies
     pip install --extra-index-url https://pypi.nvidia.com nvidia-dali-cuda120 \
     # GPU monitoring library (required by DALI examples)
-    pynvml==11.0.0 
+    pynvml==11.0.0 \
     # Additional packages
     imagehash opencv-contrib-python
 
