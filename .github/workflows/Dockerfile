@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends git && \
 # --- Install FFmpeg build dependencies ---
 RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config yasm nasm libx264-dev libx265-dev libnuma-dev libvpx-dev \
-    libfdk-aac-dev libmp3lame-dev libopus-dev libdav1d-dev libvmaf-dev \
+    libfdk-aac-dev libmp3lame-dev libopus-dev libdav1d-dev \
     libass-dev libfreetype6-dev libfontconfig1-dev libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
