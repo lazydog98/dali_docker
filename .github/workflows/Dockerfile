@@ -68,7 +68,7 @@ RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.s
     bash miniconda.sh -b -p /opt/conda && rm miniconda.sh && \
     conda config --set always_yes yes --set changeps1 no && \
     conda update -q conda && \
-    conda clean --all
+    conda clean --all --yes
 
 RUN conda install -y python=3.10
 
@@ -88,10 +88,10 @@ RUN conda install -y -c conda-forge \
     imagehash opencv-contrib-python
 
 # --- Cleanup Conda ---
-RUN conda clean --all
+RUN conda clean --all --yes
 
 # --- Verify DALI GPU detection (non-blocking) ---
-RUN python -c "import nvidia.dali.fn as fn; import nvidia.dali as dali; print(f'DALI GPU device count: {dali.get_device_count()}')" || true
+RUN python -c "import nvidia.dali.fn as fn; import nvidia.dali as dali; print(f'DALI GPU device count: {dali.get_num_gpus()}')" || true
 
 # --- Optional: working directory ---
 WORKDIR /workspace
